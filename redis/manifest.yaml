@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-headless
+  namespace: roboshop
+  labels:
+    project: roboshop
+    environment: dev
+    component: redis
+    tire: database
+spec:
+  clusterIP: None
+  selector:
+    project: roboshop
+    environment: dev
+    component: redis
+    tire: database       
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPorts: 6379 
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: roboshop
+  labels:
+    project: roboshop
+    environment: dev
+    component: redis
+    tire: database
+spec:
+  selector:
+    project: roboshop
+    environment: dev
+    component: redis
+    tire: database       
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPorts: 6379 
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: roboshop
+  labels:
+    project: roboshop
+    environment: dev
+    component: redis
+    tire: database  
+spec:
+  replicas: 2
+  serviceName: "redis-headless"
+  selector:
+    matchLabels:
+      project: roboshop
+      environment: dev
+      component: redis
+      tire: database
+  template:
+    metadata:
+      project: roboshop
+      environment: dev
+      component: redis
+      tire: database
+    spec:
+      containers:
+      - name: redis
+        image: redis:7
+        volumesMounts:
+        - name: redis-data
+          mountPath: /data
+  volumePersistanceClaim:
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "roboshop-ebs"
+      resources:
+        request:
+          storage: 2gi

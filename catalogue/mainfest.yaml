@@ -1,0 +1,76 @@
+apiVeraion: v1
+kind: ConfigMap
+metadata:
+  name: catalogue
+  namesapce: roboshop
+  labels:
+    project: roboshop
+    environmet: dev
+    tire: app
+    component: catalogue
+  data:
+    MONGO: "true"
+    MONGO_URL: "mongodb://mongodb:27017/catalogue"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogue
+  namespace: roboshop
+  labels:
+    project: roboshop
+    environmet: dev
+    tire: app
+    component: catalogue
+spec:
+  selector:
+    project: roboshop
+    environmet: dev
+    tire: app
+    component: catalogue
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: catalogue
+  namespace: roboshop 
+  labels:
+    project: roboshop
+    environmet: dev
+    tire: app
+    component: catalogue
+spec:
+  selector:
+    labelsFrom:
+      project: roboshop
+      environmet: dev
+      tire: app
+      component: catalogue
+  template:
+    metadata:
+      name: catalogue
+  namespace: roboshop 
+  labels:
+    project: roboshop
+    environmet: dev
+    tire: app
+    component: catalogue
+  spec:
+    containers:
+    - name: catalogue
+      image: ramslella/catalogue
+      envFrom:
+      - configMapRef:
+         name: catalogue
+      resource:
+        request:
+          cpu: "50m"
+          memory: "128Mi"
+        limits:
+          cpu: "100m"
+          memory: "150mi"
+

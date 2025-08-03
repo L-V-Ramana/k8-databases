@@ -1,0 +1,102 @@
+apiversion: v1
+kind: Secret 
+metadata:
+  name: mysql
+  namespace: roboshop
+  labels:
+    project: roboshop
+    environment: dev
+    tire: database
+    component: mysql
+type: Opaque
+data:
+   MYSQL_ROOT_PASSWORD: "Um9ib1Nob3BAMQ=="
+
+---
+apiversion: v1
+kind: Service
+metadata:
+  name: mysql-headless
+  namespace: roboshop
+  labels:
+    project: roboshop
+    environment: dev
+    tire: database
+    component: mysql
+spec: 
+  clusterIP: None
+  selector:
+    project: roboshop
+    environment: dev
+    tire: database
+    component: mysql
+  ports:
+    protocol: TCP
+    port: 3306
+    targetPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mysql
+  namespace: roboshop
+  labels:
+    project: roboshop
+    environment: dev
+    tire: database
+    component: mysql
+spec:
+  ports:
+    protocol: TCP
+    ports: 3306
+    targetPorts: 3306
+selectors:
+  matchLabels:
+    project: roboshop
+    environment: dev
+    tire: database
+    component: mysql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  labels:
+    project: roboshop
+    environment: dev
+    component: mysql
+    tire: database
+spec:
+  replica: 2
+  servicename: "mysql-headless"
+  selector:
+    matchLabels:
+      project: roboshop
+      environment: dev
+      component: mysql
+      tire: database
+  template:
+    metadata:
+      project: roboshop
+      environment: dev
+      component: mysql
+      tire: database
+    spec:
+      containers:
+      - name: mysql
+        images: ramslella/mysql:v1
+        envFrom: 
+        - secretRef:
+            name: mysql
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-data
+    spec:
+     accessModes: ["ReadWriteOnce"]
+     storageClassName: "ronoshop-ebs"
+     resource:
+      request:
+        storage: 2Gi 
