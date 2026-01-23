@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: user
+    environment: dev
+    tire: backend
+data:
+  REDIS_URL: "redis://redis:6379"
+  MONGO: "true" 
+  MONGO_URL: "mongodb://mongodb:27017/users"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: user
+    environment: dev
+    tire: backend
+spec:
+  selector:
+    project: roboshop
+    component: user
+    environment: dev
+    tire: backend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  namespace: roboshop
+  labels: 
+    project: roboshop
+    component: user
+    environment: dev
+    tire: backend
+spec:
+  selector:
+    matchLabels:
+      project: roboshop
+      component: user
+      environment: dev
+      tire: backend
+  template:
+    metadata:
+      name: user
+      namespace: roboshop
+      labels:
+        project: roboshop
+        component: user
+        environment: dev
+        tire: backend
+    spec:
+      containers:
+      - name: user
+        image: ramslella/user:v2
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "128m"
+          limits:
+            memory: "128Mi"
+            cpu: "256m"
+        envFrom:
+        - configMapRef:
+            name: user
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: user
+  namespace: roboshop
+  lables:
+    component: user
+    environment: dev
+    tire: backend
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: user
+  targetCPUUtilizationPercentage: 30

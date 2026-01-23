@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: cart
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: cart
+    environment: dev
+    tire: backend
+data:
+  REDIS_HOST: "redis" 
+  CATALOGUE_HOST: "catalogue"
+  CATALOGUE_PORT: "8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: cart
+    environment: dev
+    tire: backend
+spec:
+  selector:
+    project: roboshop
+    component: cart
+    environment: dev
+    tire: backend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: cart
+    environment: dev
+    tire: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: roboshop
+      component: cart
+      environment: dev
+      tire: backend
+  template:
+    metadata:
+      name: cart
+      namespace: roboshop
+      labels:
+        project: roboshop
+        component: cart
+        environment: dev
+        tire: backend
+    spec:
+      containers:
+      - name: cart
+        image: ramslella/cart:v2
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "128m"
+          limits:
+            memory: "150Mi"
+            cpu: "256m"
+        envFrom:
+        - configMapRef:
+            name: cart
+---
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: cart
+  labels:
+      project: roboshop
+      component: mongodb
+      environmet: dev
+      tier: database
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cart
+  targetCPUUtilizationPercentage: 10

@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: v1
+metadata: 
+  name: mongodb-headless
+  namespace: roboshop
+  labels: 
+    project: roboshop
+    component: mongodb
+    environmet: dev
+    tier: database
+spec:
+  clusterIP: none
+  selectors:
+    project: roboshop
+    component: mongodb
+    environmet: dev
+    tier: database
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
+---
+apiVersion: v1
+kind: v1
+metadata: 
+  name: mongodb
+  namespace: roboshop
+  labels: 
+    project: roboshop
+    component: mongodb
+    environmet: dev
+    tier: database
+spec:
+  selectors:
+    project: roboshop
+    component: mongodb
+    environmet: dev
+    tier: database
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: mongodb
+    environmet: dev
+    tier: database
+spec:
+  selector:
+    matchLabels:
+      project: roboshop
+      component: mongodb
+      environmet: dev
+      tier: database
+  serviceName: "mongodb-headless"
+  replicas: 3 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      namespace: roboshop
+      labels:
+        project: roboshop
+        component: mongodb
+        environmet: dev
+        tier: database
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mongodb
+        image: ramslella/mongodb:v1
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "128m"
+          limits:
+            memory: "100Mi"
+            cpu: "256m"
+        volumeMounts:
+        - name: mongodb
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: ""
+      resources:
+        requests:
+          storage: 2Gi
