@@ -76,10 +76,12 @@ spec:
       tire: database
   template:
     metadata:
-      project: roboshop
-      environment: dev
-      component: mysql
-      tire: database
+      name: mysql
+      lables:
+        project: roboshop
+        environment: dev
+        component: mysql
+        tire: database
     spec:
       containers:
       - name: mysql
