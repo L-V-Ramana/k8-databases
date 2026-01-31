@@ -62,7 +62,7 @@ spec:
     spec:
       containers:
         - name: shipping
-          image: roboshop/shipping:v2
+          image: ramslella/shipping:v2
           resources:
             requests: 
               cpu: "150m"
