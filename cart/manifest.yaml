@@ -18,7 +18,7 @@ kind: Service
 metadata:
   name: cart
   namespace: roboshop
-  labeles:
+  labels:
     project: roboshop
     environment: dev
     tire: app
