@@ -38,8 +38,7 @@ spec:
       tier: app
   template:
     metadata:
-      name: user
-      labels:
+       labels:
         project: roboshop
         component: user
         envvironment: dev
