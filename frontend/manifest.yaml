@@ -107,13 +107,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: frontend
-  namespace: roboshop
-  labels:
-    project: roboshop
-    component: frontend
-    environment: dev
-    tire: web
+      project: roboshop
+      component: frontend
+      environment: dev
+      tire: web
   template:
     metadata:
       name: frontend
