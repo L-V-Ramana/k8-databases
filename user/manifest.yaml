@@ -17,7 +17,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8080
-    targrtPort: 8080
+    targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,7 +39,6 @@ spec:
   template:
     metadata:
       name: user
-      namespace: roboshop
       labels:
         project: roboshop
         component: user
