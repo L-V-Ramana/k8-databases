@@ -100,7 +100,7 @@ spec:
       name: rabbitmq-data
     spec:
       accessModes: ["ReadWriteOnce"]
-      strogeClassName: "roboshop-ebs"
+      stroageClassName: "roboshop-ebs"
       resources:
         requests:
           stroge: 2Gi
