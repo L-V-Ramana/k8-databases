@@ -8,9 +8,9 @@ metadata:
     environmet: dev
     tire: app
     component: catalogue
-  data:
-    MONGO: "true"
-    MONGO_URL: "mongodb://mongodb:27017/catalogue"
+data:
+  MONGO: "true"
+  MONGO_URL: "mongodb://mongodb:27017/catalogue"
 ---
 apiVersion: v1
 kind: Service
