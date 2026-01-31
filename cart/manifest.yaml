@@ -68,10 +68,10 @@ spec:
         resources:
           requests:
             cpu: "64m"
-            stroge: "100Mi"
+            memory: "100Mi"
           limits:
             cpu: "128m"
-            stroge: "150Mi"
+            memory: "150Mi"
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
