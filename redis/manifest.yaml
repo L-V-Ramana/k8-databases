@@ -68,7 +68,7 @@ spec:
       containers:
       - name: redis
         image: redis:7
-        volumesMounts:
+        volumeMounts:
         - name: redis-data
           mountPath: /data
   volumePersistanceClaim:
