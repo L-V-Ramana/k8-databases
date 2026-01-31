@@ -59,20 +59,20 @@ spec:
         environmet: dev
         tire: app
         component: catalogue
-  spec:
-    containers:
-    - name: catalogue
-      image: ramslella/catalogue
-      envFrom:
-      - configMapRef:
-         name: catalogue
-      resource:
-        request:
-          cpu: "50m"
-          memory: "128Mi"
-        limits:
-          cpu: "100m"
-          memory: "150mi"
+    spec:
+      containers:
+      - name: catalogue
+        image: ramslella/catalogue
+        envFrom:
+        - configMapRef:
+          name: catalogue
+        resource:
+          request:
+            cpu: "50m"
+            memory: "128Mi"
+          limits:
+            cpu: "100m"
+            memory: "150mi"
           
 ---
 apiVersion: autoscaling/v2
