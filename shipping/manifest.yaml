@@ -59,8 +59,8 @@ spec:
         environment: dev
         component: shipping
         tire: app
-      spec:
-        containers:
+    spec:
+      containers:
         - name: shipping
           image: roboshop/shipping:v2
           resources:
