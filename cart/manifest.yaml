@@ -53,19 +53,20 @@ spec:
       component: cart
   template:
     metadata:
-      project: roboshop
-      environment: dev
-      tire: app
-      component: cart
+      labeles:
+        project: roboshop
+        environment: dev
+        tire: app
+        component: cart
     spec:
       containers:
       - name: cart
-        image: ramslella/cart:v1
+        image: ramslella/cart:v2
         envRef:
         - configMapRef:
           name: cart
         resources:
-          request:
+          requests:
             cpu: "64m"
             stroge: "100Mi"
           limits:
