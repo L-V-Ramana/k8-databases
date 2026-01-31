@@ -62,11 +62,12 @@ metadata:
     component: payment
     tire: app
 spec:
-  matchLabels:
-    project: roboshop
-    environment: dev
-    component: payment
-    tire: app
+  selector:
+    matchLabels:
+      project: roboshop
+      environment: dev
+      component: payment
+      tire: app
   template:
     metadata:
       name: shipping
