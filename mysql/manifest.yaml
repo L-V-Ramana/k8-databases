@@ -50,12 +50,12 @@ spec:
   - protocol: TCP
     ports: 3306
     targetPorts: 3306
-selectors:
-  matchLabels:
-    project: roboshop
-    environment: dev
-    tire: database
-    component: mysql
+  selectors:
+    matchLabels:
+      project: roboshop
+      environment: dev
+      tire: database
+      component: mysql
 ---
 apiVersion: apps/v1
 kind: StatefulSet
