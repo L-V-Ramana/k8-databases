@@ -38,7 +38,9 @@ spec:
       tier: app
   template:
     metadata:
-       labels:
+      name: cart
+      namespace: roboshop
+      labels:
         project: roboshop
         component: user
         envvironment: dev
