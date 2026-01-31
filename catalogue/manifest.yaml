@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: catalogue
-  namesapce: roboshop
+  namespace: roboshop
   labels:
     project: roboshop
     environmet: dev
@@ -45,7 +45,7 @@ metadata:
     component: catalogue
 spec:
   selector:
-    labelsFrom:
+    matchLabels:
       project: roboshop
       environmet: dev
       tire: app
@@ -53,12 +53,12 @@ spec:
   template:
     metadata:
       name: catalogue
-  namespace: roboshop 
-  labels:
-    project: roboshop
-    environmet: dev
-    tire: app
-    component: catalogue
+      namespace: roboshop 
+      labels:
+        project: roboshop
+        environmet: dev
+        tire: app
+        component: catalogue
   spec:
     containers:
     - name: catalogue
