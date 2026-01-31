@@ -63,7 +63,8 @@ spec:
     metadata:
       name: mongodb
       labels:
-        project: mongodb
+        project: roboshop
+        component: mongodb
         environment: dev
         tire: database
     spec:
