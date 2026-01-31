@@ -20,9 +20,10 @@ kind: Secret
 metadata:
   name: payment
   labels:
-    component: payment
     project: roboshop
-    tier: app
+    environment: dev
+    component: payment
+    tire: app
 type: Opaque
 data:
   AMQP_USER: "cm9ib3Nob3A="
