@@ -95,12 +95,12 @@ spec:
         volumeMounts:
         - name: rabbitmq-data
           mountPath: /var/lib/rabbitmq
-    volumesPeersistanceClaim:
-    - metadata:
-        name: rabbitmq-data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        strogeClassName: "roboshop-ebs"
-        resource:
-          request:
-            stroge: 2Gi
+  volumesPeersistanceClaim:
+  - metadata:
+      name: rabbitmq-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      strogeClassName: "roboshop-ebs"
+      resource:
+        request:
+          stroge: 2Gi
