@@ -68,7 +68,7 @@ metadata:
     component: rabbitmq
     tire: database
 spec:
-  replica: 2
+  replicas: 2
   serviceName: "rabbitmq-headless"
   selector:
     matchLabels:
@@ -85,7 +85,7 @@ spec:
         environmet: dev
         component: rabbitmq
         tire: database
-      spec:
+    spec:
         containers:
         - name: rabbitmq
           image: rabbitmq:3
