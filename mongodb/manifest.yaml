@@ -10,7 +10,7 @@ metadata:
 spec:
   clusterIP: None
   selector:
-    labelsFrom:
+    matchLabels:
       project: mongodb
       environment: dev
       tire: database
