@@ -85,7 +85,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        images: ramslella/mysql:v1
+        image: ramslella/mysql:v1
         envFrom: 
         - secretRef:
             name: mysql
