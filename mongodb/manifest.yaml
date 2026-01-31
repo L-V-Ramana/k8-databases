@@ -10,7 +10,6 @@ metadata:
 spec:
   clusterIP: None
   selector:
-    matchLabels:
       project: roboshop
       component: mongodb
       environment: dev
@@ -32,7 +31,6 @@ metadata:
    tire: database 
 spec:
   selector:
-    matchLabels:
       project: roboshop
       component: mongodb
       environment: dev
@@ -57,7 +55,8 @@ spec:
   serviceName: "mongodb-headless"
   selector:
     matchLabels:
-      project: mongodb
+      project: roboshop
+      component: mongodb
       environment: dev
       tire: database
   template:
