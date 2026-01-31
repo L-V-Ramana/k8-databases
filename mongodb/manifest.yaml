@@ -15,7 +15,7 @@ spec:
       environment: dev
       tire: database
   ports:
-    protocol: TCP
+  - protocol: TCP
     port: 27017
     targetPort: 27017
 
@@ -36,7 +36,7 @@ spec:
       environment: dev
       tire: database
   ports:
-    protocol: TCP
+  - protocol: TCP
     port: 27017
     targetPort: 27017
 ---
@@ -51,7 +51,7 @@ metadata:
     environment: dev
     tire: database
 spec:
-  replica: 3
+  replicas: 3
   serviceName: "mongodb-headless"
   selector:
     matchLabels:
