@@ -64,7 +64,7 @@ spec:
         image: ramslella/cart:v2
         envFrom:
         - configMapRef:
-          name: cart
+            name: cart
         resources:
           requests:
             cpu: "64m"
