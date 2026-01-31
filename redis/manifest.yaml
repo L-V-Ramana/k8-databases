@@ -64,6 +64,11 @@ spec:
   template:
     metadata:
       name: redis
+      labels:
+        project: roboshop
+        environment: dev
+        component: redis
+        tire: database
     spec:
       containers:
       - name: redis
