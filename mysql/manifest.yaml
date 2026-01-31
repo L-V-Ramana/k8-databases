@@ -98,6 +98,6 @@ spec:
     spec:
      accessModes: ["ReadWriteOnce"]
      storageClassName: "roboshop-ebs"
-     resource:
+     resources:
       request:
         storage: 2Gi 
