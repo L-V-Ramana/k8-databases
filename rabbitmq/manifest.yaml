@@ -77,23 +77,24 @@ spec:
       component: rabbitmq
       tire: database
   template:
-    name: rabbitmq
-    namespace: roboshop
-    labels:
-      project: roboshop
-      environmet: dev
-      component: rabbitmq
-      tire: database
-    spec:
-      containers:
-      - name: rabbitmq
-        image: rabbitmq:3
-        envFrom:
-        - secretRef:
-          name: rabbitmq
-        volumeMounts:
-        - name: rabbitmq-data
-          mountpath: /var/lib/rabbitmq
+    metadata:
+      name: rabbitmq
+      namespace: roboshop
+      labels:
+        project: roboshop
+        environmet: dev
+        component: rabbitmq
+        tire: database
+      spec:
+        containers:
+        - name: rabbitmq
+          image: rabbitmq:3
+          envFrom:
+          - secretRef:
+            name: rabbitmq
+          volumeMounts:
+          - name: rabbitmq-data
+            mountpath: /var/lib/rabbitmq
     volumesPeersistanceClaim:
     - metadata:
         name: rabbitmq-data
