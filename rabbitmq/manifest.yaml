@@ -86,15 +86,15 @@ spec:
         component: rabbitmq
         tire: database
     spec:
-        containers:
-        - name: rabbitmq
-          image: rabbitmq:3
-          envFrom:
-          - secretRef:
-            name: rabbitmq
-          volumeMounts:
-          - name: rabbitmq-data
-            mountpath: /var/lib/rabbitmq
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3
+        envFrom:
+        - secretRef:
+          name: rabbitmq
+        volumeMounts:
+        - name: rabbitmq-data
+          mountpath: /var/lib/rabbitmq
     volumesPeersistanceClaim:
     - metadata:
         name: rabbitmq-data
