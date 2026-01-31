@@ -18,7 +18,7 @@ spec:
   ports:
   - protocol: TCP
     port: 6379
-    targetPorts: 6379 
+    targetPort: 6379 
 ---
 
 apiVersion: v1
@@ -40,7 +40,7 @@ spec:
   ports:
   - protocol: TCP
     port: 6379
-    targetPorts: 6379 
+    targetPort: 6379 
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -63,10 +63,7 @@ spec:
       tire: database
   template:
     metadata:
-      project: roboshop
-      environment: dev
-      component: redis
-      tire: database
+      name: redis
     spec:
       containers:
       - name: redis
