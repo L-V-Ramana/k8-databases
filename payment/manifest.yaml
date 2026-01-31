@@ -70,8 +70,6 @@ spec:
       tire: app
   template:
     metadata:
-      name: shipping
-      namespace: roboshop
       labels:
         project: roboshop
         environment: dev
