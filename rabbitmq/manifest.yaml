@@ -8,8 +8,8 @@ metadata:
     environmet: dev
     component: rabbitmq
     tire: database
-  type: Opaque
-  data: 
+type: Opaque
+data: 
     RABBITMQ_DEFAULT_USER: "cm9ib3Nob3A="
     RABBITMQ_DEFAULT_PASS: "cm9ib3Nob3AxMjM="
 ---
