@@ -101,6 +101,6 @@ spec:
     spec:
       accessModes: ["ReadWriteOnce"]
       strogeClassName: "roboshop-ebs"
-      resource:
+      resources:
         request:
           stroge: 2Gi
