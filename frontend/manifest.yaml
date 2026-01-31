@@ -114,15 +114,15 @@ spec:
     component: frontend
     environment: dev
     tire: web
-template:
-  metadata:
-    name: frontend
-    namespace: roboshop
-    labels:
-      project: roboshop
-      component: frontend
-      environment: dev
-      tire: web
+  template:
+    metadata:
+      name: frontend
+      namespace: roboshop
+      labels:
+        project: roboshop
+        component: frontend
+        environment: dev
+        tire: web
   spec:
     containers:
     - name: frontend
