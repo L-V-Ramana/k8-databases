@@ -65,7 +65,7 @@ spec:
         image: ramslella/catalogue
         envFrom:
         - configMapRef:
-          name: catalogue
+            name: catalogue
         resource:
           request:
             cpu: "50m"
