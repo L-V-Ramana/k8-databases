@@ -77,8 +77,8 @@ spec:
         tire: app
     spec:
       containers:
-      - name: shipping
-        image: ramslella/shipping:v2
+      - name: payment
+        image: ramslella/payment:v2
         resources:
           requests:
             cpu: "100m"
