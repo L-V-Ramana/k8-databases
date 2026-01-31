@@ -72,7 +72,7 @@ spec:
         image: ramslella/mongodb:v1
         volumeMounts:
         - name: mongodb-data
-          mountpath: /data/db
+          mountPath: /data/db
   volumeClaimTemplates:
   - metadata:
       name: mongodb-data
