@@ -53,7 +53,7 @@ spec:
       component: cart
   template:
     metadata:
-      labeles:
+      labels:
         project: roboshop
         environment: dev
         tire: app
@@ -62,7 +62,7 @@ spec:
       containers:
       - name: cart
         image: ramslella/cart:v2
-        envRef:
+        envFrom:
         - configMapRef:
           name: cart
         resources:
