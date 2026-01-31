@@ -31,7 +31,7 @@ spec:
     tire: database
     component: mysql
   ports:
-    protocol: TCP
+  - protocol: TCP
     port: 3306
     targetPort: 3306
 ---
@@ -47,7 +47,7 @@ metadata:
     component: mysql
 spec:
   ports:
-    protocol: TCP
+  - protocol: TCP
     ports: 3306
     targetPorts: 3306
 selectors:
