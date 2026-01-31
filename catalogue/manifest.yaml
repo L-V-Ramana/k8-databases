@@ -72,7 +72,7 @@ spec:
             memory: "128Mi"
           limits:
             cpu: "100m"
-            memory: "150mi"
+            memory: "150Mi"
           
 ---
 apiVersion: autoscaling/v2
