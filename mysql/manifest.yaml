@@ -66,8 +66,8 @@ metadata:
     component: mysql
     tire: database
 spec:
-  replica: 2
-  servicename: "mysql-headless"
+  replicas: 2
+  serviceName: "mysql-headless"
   selector:
     matchLabels:
       project: roboshop
