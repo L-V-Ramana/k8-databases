@@ -4,43 +4,38 @@ metadata:
   name: redis-headless
   namespace: roboshop
   labels:
-    project: roboshop
-    environment: dev
     component: redis
-    tire: database
+    project: roboshop
+    tier: database
 spec:
   clusterIP: None
   selector:
-    project: roboshop
-    environment: dev
     component: redis
-    tire: database       
+    project: roboshop
+    tier: database
   ports:
   - protocol: TCP
-    port: 6379
-    targetPort: 6379 
+    port: 6379 # service port
+    targetPort: 6379 # container port
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: redis
   namespace: roboshop
   labels:
-    project: roboshop
-    environment: dev
     component: redis
-    tire: database
+    project: roboshop
+    tier: database
 spec:
   selector:
-    project: roboshop
-    environment: dev
     component: redis
-    tire: database       
+    project: roboshop
+    tier: database
   ports:
   - protocol: TCP
-    port: 6379
-    targetPort: 6379 
+    port: 6379 # service port
+    targetPort: 6379 # container port
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -48,40 +43,37 @@ metadata:
   name: redis
   namespace: roboshop
   labels:
-    project: roboshop
-    environment: dev
     component: redis
-    tire: database  
+    project: roboshop
+    tier: database
 spec:
-  replicas: 2
-  serviceName: "redis-headless"
   selector:
     matchLabels:
-      project: roboshop
-      environment: dev
       component: redis
-      tire: database
+      project: roboshop
+      tier: database # has to match .spec.template.metadata.labels
+  serviceName: "redis-headless" # this should be headless service
+  replicas: 2 # by default is 1
   template:
     metadata:
-      name: redis
       labels:
-        project: roboshop
-        environment: dev
         component: redis
-        tire: database
+        project: roboshop
+        tier: database
     spec:
       containers:
       - name: redis
-        image: redis:7
+        image: redis:7.0
         volumeMounts:
         - name: redis-data
           mountPath: /data
+  # This is nothing but PVC, you can directly create here
   volumeClaimTemplates:
-    - metadata:
-        name: redis-data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: "roboshop-ebs"
-        resources:
-          requests:
-            storage: 5Gi
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "roboshop-ebs"
+      resources:
+        requests:
+          storage: 2Gi
