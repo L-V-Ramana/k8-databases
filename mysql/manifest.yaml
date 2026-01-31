@@ -48,7 +48,7 @@ metadata:
 spec:
   ports:
   - protocol: TCP
-    ports: 3306
+    port: 3306
     targetPort: 3306
   selector:
       project: roboshop
